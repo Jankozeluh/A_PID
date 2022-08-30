@@ -59,7 +59,6 @@ data_finder <- R6Class("data_finder",
                            private$base <- self$data$get_supply()
                          },
                          find_it = function(arg) {
-                           self$data$fresh_data()
                            crypt <- private$base$cryptowatch$summaries %>% filter(grepl(tolower(arg), tolower(rownames(.))))
                            ape <- private$base$ape_wisdom %>% filter(grepl(tolower(arg), tolower(ticker)))
                            google <- gtrendsR::gtrends(arg)
@@ -71,16 +70,4 @@ data_finder <- R6Class("data_finder",
                          base=NULL
                        )
 )
-
-
-data <- dataGen$new()
-data$fresh_data()
-ll <- data$get_supply()
-
-crypt <- 'ada'
-
-oo <- ll$cryptowatch$summaries %>% filter(grepl(tolower(crypt), tolower(rownames(.))))
-oo <- ll$apew_isdom %>% filter(grepl(tolower(crypt), tolower(ticker)))
-
 data <- data_finder$new()
-a <- data$find_it('ada')
